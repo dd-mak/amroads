@@ -1,0 +1,16 @@
+{
+  "id": "am",
+  "name": "Armenia",
+  "name_local": "Հայաստան",
+  "relation_id": 364066,
+  "bounds": [[43.44, 38.84], [46.63, 41.30]],
+  "languages": ["en", "hy", "ru"],
+  "default_lang": "en",
+  "accent": "#D90012",
+  "admin": { "level": 4, "label": "Marzes" },
+  "imagery": { "mapillary": true, "kartaview": true },
+  "official_source": {
+    "name": "Ministry of Territorial Administration and Infrastructure",
+    "url": "https://mta.gov.am"
+  }
+}
