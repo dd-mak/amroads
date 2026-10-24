@@ -1,0 +1,183 @@
+{
+ "country": "am",
+ "name": "Armenia",
+ "name_local": "Հայաստան",
+ "languages": [
+  "en",
+  "hy",
+  "ru"
+ ],
+ "default_lang": "en",
+ "updated": "2026-10-24",
+ "files": {
+  "1": [
+   "roads_t1.geojson"
+  ],
+  "2": [
+   "roads_t2.geojson"
+  ],
+  "3": [
+   "regions/364077.geojson",
+   "regions/364078.geojson",
+   "regions/364079.geojson",
+   "regions/364080.geojson",
+   "regions/364081.geojson",
+   "regions/364082.geojson",
+   "regions/364083.geojson",
+   "regions/364084.geojson",
+   "regions/364086.geojson",
+   "regions/3917110.geojson"
+  ],
+  "rail": [
+   "railways.geojson"
+  ]
+ },
+ "regions": [
+  {
+   "id": 364077,
+   "name": "Շիրակի մարզ",
+   "name_en": "Shirak Province",
+   "name_ru": "Ширакская область",
+   "file": "regions/364077.geojson",
+   "count": 12065,
+   "bbox": [
+    40.435417,
+    43.4471395,
+    41.176241,
+    44.1958928
+   ]
+  },
+  {
+   "id": 364078,
+   "name": "Լոռու մարզ",
+   "name_en": "Lori Province",
+   "name_ru": "Лорийская область",
+   "file": "regions/364078.geojson",
+   "count": 22177,
+   "bbox": [
+    40.6686207,
+    43.9527291,
+    41.247143,
+    44.9412295
+   ]
+  },
+  {
+   "id": 364079,
+   "name": "Տավուշի մարզ",
+   "name_en": "Tavush Province",
+   "name_ru": "Тавушская область",
+   "file": "regions/364079.geojson",
+   "count": 9397,
+   "bbox": [
+    40.6417951,
+    44.7390505,
+    41.3016463,
+    45.607953
+   ]
+  },
+  {
+   "id": 364080,
+   "name": "Գեղարքունիքի մարզ",
+   "name_en": "Gegharkunik Province",
+   "name_ru": "Гехаркуникская область",
+   "file": "regions/364080.geojson",
+   "count": 15839,
+   "bbox": [
+    39.8719833,
+    44.7796595,
+    40.7402238,
+    45.97991
+   ]
+  },
+  {
+   "id": 364081,
+   "name": "Վայոց ձորի մարզ",
+   "name_en": "Vayots Dzor Province",
+   "name_ru": "Вайоцдзорская область",
+   "file": "regions/364081.geojson",
+   "count": 6673,
+   "bbox": [
+    39.4904551,
+    45.0600515,
+    40.0134748,
+    45.8145258
+   ]
+  },
+  {
+   "id": 364082,
+   "name": "Սյունիքի մարզ",
+   "name_en": "Syunik Province",
+   "name_ru": "Сюникская область",
+   "file": "regions/364082.geojson",
+   "count": 9512,
+   "bbox": [
+    38.8404775,
+    45.6915487,
+    39.8620683,
+    46.6333087
+   ]
+  },
+  {
+   "id": 364083,
+   "name": "Արարատի մարզ",
+   "name_en": "Ararat Province",
+   "name_ru": "Араратская область",
+   "file": "regions/364083.geojson",
+   "count": 39069,
+   "bbox": [
+    39.7136705,
+    44.3122115,
+    40.191421,
+    45.1122036
+   ]
+  },
+  {
+   "id": 364084,
+   "name": "Կոտայքի մարզ",
+   "name_en": "Kotayk Province",
+   "name_ru": "Котайкская область",
+   "file": "regions/364084.geojson",
+   "count": 26129,
+   "bbox": [
+    40.094729,
+    44.3775231,
+    40.7119322,
+    45.0187453
+   ]
+  },
+  {
+   "id": 364086,
+   "name": "Արմավիրի մարզ",
+   "name_en": "Armavir Province",
+   "name_ru": "Армавирская область",
+   "file": "regions/364086.geojson",
+   "count": 11795,
+   "bbox": [
+    40.0163533,
+    43.648545,
+    40.284481,
+    44.4364081
+   ]
+  },
+  {
+   "id": 3917110,
+   "name": "Արագածոտնի մարզ",
+   "name_en": "Aragatsotn Province",
+   "name_ru": "Арагацотнская область",
+   "file": "regions/3917110.geojson",
+   "count": 6040,
+   "bbox": [
+    40.1725722,
+    43.5907744,
+    40.7520605,
+    44.5561537
+   ]
+  }
+ ],
+ "counts": {
+  "roads_t1": 5710,
+  "roads_t2": 6423,
+  "railways": 1622,
+  "local_roads": 158697
+ }
+}
