@@ -1,0 +1,47 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths: [index.html, robots.txt, sitemap.xml, og-image.png, data/**]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble site (fills in your real URL automatically)
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+        run: |
+          URL="${SITE_URL:-https://${OWNER,,}.github.io/${REPO}/}"
+          URL="${URL%/}/"
+          mkdir _site
+          cp index.html robots.txt sitemap.xml og-image.png _site/
+          [ -d data ] && cp -r data _site/ || echo "No data/ yet: the page will query OpenStreetMap live"
+          sed -i "s|https://YOUR-USERNAME.github.io/armenia-roads/|${URL}|g" _site/index.html _site/robots.txt _site/sitemap.xml
+          grep -c "YOUR-USERNAME" _site/index.html || true
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

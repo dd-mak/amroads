@@ -1,0 +1,58 @@
+name: Update Armenia road & rail data
+
+on:
+  schedule:
+    - cron: '0 3 1 * *'      # monthly, 03:00 UTC on the 1st
+  workflow_dispatch:          # or run manually from the Actions tab
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build data (fails, and nothing is committed, if any query fails or data shrinks >20%)
+        run: python scripts/build_data.py
+
+      - name: Verify output
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          m = json.load(open("data/meta.json", encoding="utf-8"))
+          files = [f for v in m["files"].values() for f in v]
+          assert files and m["counts"].get("railways", 0) > 0, "empty dataset"
+          for f in files:
+              assert pathlib.Path("data", f).stat().st_size < 95e6, f"{f} too large for GitHub (100 MB)"
+          print(m["updated"], m["counts"])
+          PY
+          echo "Total size: $(du -sh data | cut -f1)"
+
+      - name: Commit changes and redeploy site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data sitemap.xml robots.txt
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update Armenia road & rail data $(date -u +%F)"
+            git pull --rebase
+            git push
+            gh workflow run pages.yml
+          fi
