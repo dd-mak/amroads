@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Armenia Road &amp; Railway Map · Roads, Rail, Speed Limits, Surface | OpenStreetMap</title>
 <meta name="description" content="Interactive map of every road and railway in Armenia from OpenStreetMap: motorways, M/H/T highways, local roads, surface, speed limits, street lighting, rail gauge and electrification. Free GeoJSON and CSV download.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -105,15 +105,35 @@ h1::after{content:'';display:block;margin-top:12px;border-top:3px dashed var(--o
 .btns button:active{transform:none;box-shadow:none}
 .row:hover .sw{border-top-width:calc(var(--h,4px) + 2px)}
 @media(max-width:760px){#map::before,#map::after{display:none}}
-.li{font:500 11px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid var(--ink);padding:5px 10px}.li:hover{background:var(--ink);color:var(--paper)}.li .ls{display:none}
-@media(max-width:760px){.li .lf{display:none}.li .ls{display:inline}.li{padding:5px 8px}}
+.li{display:grid;place-items:center;width:28px;height:28px;border:1px solid var(--ink);color:var(--ink)}.li svg{width:14px;height:14px;fill:currentColor}.li:hover{background:var(--ink);color:var(--paper)}
+#sheet{display:none}
+@media(max-width:760px){
+ #top{padding:0 10px}#top b{flex:1;min-width:0;gap:8px;font-size:12px}#top [data-i18n=title]{min-width:0;max-width:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .r{gap:6px;flex:none}.langseg button{padding:6px 7px;font-size:10px}
+ #tm{font-size:0;padding:0;width:28px;height:28px;display:grid;place-items:center}#tm::before{content:'◐';font-size:15px}
+ aside{display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;transition:height .25s ease;padding-bottom:env(safe-area-inset-bottom)}
+ #wrap[data-sheet=peek] aside{height:104px;overflow:hidden}#wrap[data-sheet=half] aside{height:50%}#wrap[data-sheet=full] aside{height:90%}
+ #sheet{display:flex;justify-content:space-between;align-items:center;order:-2;position:sticky;top:0;z-index:3;width:100%;border:0;border-bottom:1px solid var(--ink);background:var(--paper);padding:11px 16px}
+ #sheet::after{content:'';width:8px;height:8px;border:solid var(--ink);border-width:2px 2px 0 0;transform:rotate(-45deg);margin-right:4px;transition:transform .2s}
+ #wrap[data-sheet=full] #sheet::after{transform:rotate(135deg)}#sheet:hover{background:var(--paper);color:var(--ink)}
+ aside .kpi{order:-1}.kpi b{font-size:17px}.kpi span{font-size:8px}
+ aside section:first-of-type{padding:14px 16px}aside section:first-of-type::after,.kick,aside section:first-of-type p,h1::after{display:none}
+ section{padding:16px}h1{font-size:20px;margin-bottom:8px}
+ .row{padding:9px 2px}label.opt{padding:13px 0}button{padding:11px 12px}.rm button{padding:11px 4px}
+ .maplibregl-ctrl-top-right{display:none}
+ #status{left:8px;right:8px;bottom:8px;min-width:0;padding:4px 8px;font-size:10px;box-shadow:2px 2px 0 var(--ink)}
+ .lg{font-size:9px;line-height:1.5;padding:4px 7px;margin:0 8px 52px 0!important;max-height:38vh;overflow:hidden}#wrap:not([data-sheet=peek]) .lg{display:none!important}aside>*{flex:none}
+ .maplibregl-popup-content{min-width:0;max-width:78vw}.maplibregl-ctrl-scale{display:none}
+}
+.by{font:500 10px var(--mono);letter-spacing:.01em;text-transform:none;color:var(--ink);margin-right:-2px;white-space:nowrap}
+@media(max-width:600px){.by{display:none}}
 </style></head><body>
 <div id="flag" aria-hidden="true"><i></i><i></i><i></i></div>
-<div id="top" role="banner"><b><span class="mark"><i></i><i></i><i></i></span><span data-i18n="title">Roads & Railways of Armenia</span></b><div class="r"><a class="li" href="https://www.linkedin.com/in/daniil-makedonskii-621972251/" target="_blank" rel="noopener me" aria-label="LinkedIn"><span class="lf">LinkedIn</span><span class="ls">in</span></a>
+<div id="top" role="banner"><b><span class="mark"><i></i><i></i><i></i></span><span data-i18n="title">Roads & Railways of Armenia</span></b><div class="r"><span class="by">Daniil M</span><a class="li" href="https://www.linkedin.com/in/daniil-makedonskii-621972251/" target="_blank" rel="noopener me" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg></a>
 <div class="langseg" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="hy" aria-pressed="false">ՀԱՅ</button><button type="button" data-lang="ru" aria-pressed="false">РУС</button></div>
 <button id="tm">Dark mode</button></div></div>
-<div id="wrap">
-<aside>
+<div id="wrap" data-sheet="peek">
+<aside><button id="sheet" type="button" aria-label="Layers"><span data-i18n="layersBtn">Layers &amp; data</span></button>
  <section><div class="kick">Հայաստան · AM · OpenStreetMap</div><h1 data-i18n-html="h1">Armenia,<br>road by road</h1><p data-i18n="intro">The road and railway network of Armenia from OpenStreetMap. Main roads load on arrival; local roads load on request.</p><button id="rnd" type="button" style="margin-top:12px" data-i18n="rnd">Random road</button></section>
  <div class="kpi">
   <div><b id="kN">–</b><span data-i18n="segments">segments</span></div>
@@ -129,6 +149,7 @@ h1::after{content:'';display:block;margin-top:12px;border-top:3px dashed var(--o
   <div id="leg" style="margin-top:12px"></div></section>
  <section class="railsec"><h2 data-i18n="railway">Railway</h2>
   <label class="opt"><input type="checkbox" id="rl" checked><b data-i18n="railShow">Show railway</b><small data-i18n="railShowHint">Lines coloured by type.</small></label>
+  <label class="opt"><input type="checkbox" id="sub" checked><b data-i18n="subShow">Subway (Yerevan Metro)</b><small id="subinfo"></small></label>
   <div class="grp"><b data-i18n="colourBy">Colour lines by</b></div><div id="rmode" class="rm"></div><div id="rleg"></div><div id="rcls"></div></section>
  <section><h2 data-i18n="roadClasses">Road classes</h2><div id="cls"></div></section>
  <section><h2 data-i18n="download">Download</h2><div class="btns">
@@ -315,13 +336,13 @@ const PAD=()=>30,RPRES=new Set();let SPK='';
 const RF=[['rt','byType',k=>railName(k)],['g','byGauge',k=>lab('gauge',k)],['el','electrification',k=>lab('el.',k)],['us','usage',k=>k==='none'?t('notTagged'):lab('usage.',k)],['rs','railSpeed',k=>k==='none'?t('notTagged'):k+' km/h'],['tk','railTracks',k=>k==='1'?t('railSingle'):k==='2+'?t('railDouble'):t('notTagged')],['sv','railService',k=>k==='track'?t('railMainTrack'):lab('service.',k)]];
 const RHF=Object.fromEntries(RF.map(f=>[f[0],new Set()]));RHF.rt.add('razed');
 const rnorm=f=>{const p=f.properties;p.g=p.gauge_norm||'unknown';p.el=p.el||'no';p.tk=p.tracks>=2?'2+':p.tracks===1?'1':'unknown';p.sv=p.service||'track';p.us=p.usage||'none';p.rs=p.speed?String(p.speed):'none';return f};
-const RMODES=[['el','electrification'],['g','byGauge'],['rs','railSpeed'],['rt','byType'],['us','usage'],['tk','railTracks']];let RM='el';const RORD={};
+const RMODES=[['el','electrification'],['g','byGauge'],['rs','railSpeed'],['rt','byType'],['us','usage'],['tk','railTracks']];let RM='el',SB=true;const RORD={};
 const RPAL={el:{contact_line:'#E8A100',no:'#52606D'},g:{russian:'#D90012',standard:'#0033A0',metre:'#7B3FA0',narrow750:'#1B9E77',unknown:'#9AA3AB'},tk:{'1':'#52606D','2+':'#D90012',unknown:'#9AA3AB'},us:{main:'#0033A0',branch:'#1B9E77',industrial:'#8A5A1E',tourism:'#7B3FA0',military:'#52606D',none:'#9AA3AB'}};
 const rcol=(k,v)=>k==='rt'?(r=>DARK?r[3]:r[2])(RCLS.find(x=>x[0]===v)||RCLS[0]):k==='rs'?(v==='none'?'#9AA3AB':spCol(Math.round(10+(Math.min(160,Math.max(20,+v))-20)/140*120),DARK)):(RPAL[k]||{})[v]||'#F2A800';
 const syncAll=()=>{const a=$('#allr');if(!a)return;const n=CLS.filter(c=>S.cls.has(c[0])).length;a.checked=n===CLS.length;a.indeterminate=n>0&&n<CLS.length};
 const rReset=()=>{RF.forEach(([k])=>RHF[k].clear());RHF.rt.add('razed');railFilter()};
 const rpass=p=>RF.every(([k])=>!RHF[k].has(String(p[k])));
-const railFilter=()=>{const c=RF.filter(([k])=>RHF[k].size).map(([k])=>['!',['in',['get',k],['literal',[...RHF[k]]]]]);['rail-a','rail-b'].forEach(i=>map.getLayer(i)&&map.setFilter(i,c.length?['all',...c]:null))};
+const railFilter=()=>{const c=[['!=',['get','rt'],'subway'],...RF.filter(([k])=>RHF[k].size).map(([k])=>['!',['in',['get',k],['literal',[...RHF[k]]]]])];['rail-a','rail-b'].forEach(i=>map.getLayer(i)&&map.setFilter(i,['all',...c]))};
 Object.assign(I18N.en,{speedLimitsHint:'Exact limit in km/h as tagged in OSM (30, 50, 90…). Grey = not tagged.',railShowHint:'Lines coloured by type. Untick a type below to hide it.',railKmActive:'km active',railSegs:'segments',railElec:'electrified',railActiveGrp:'In operation',railHistGrp:'Historic & inactive'});
 Object.assign(I18N.hy,{speedLimitsHint:'Ճշգրիտ սահմանափակումը կմ/ժ-ով, ինչպես նշված է OSM-ում (30, 50, 90…): Մոխրագույն = չնշված:',railShowHint:'Գծերը ըստ տեսակի։ Անջատեք տեսակը՝ թաքցնելու համար։',railKmActive:'կմ գործող',railSegs:'հատված',railElec:'էլեկտրիֆ.',railActiveGrp:'Գործող',railHistGrp:'Պատմական և չգործող'});
 Object.assign(I18N.ru,{speedLimitsHint:'Точное ограничение в км/ч, как в OSM (30, 50, 90…). Серый = не указано.',railShowHint:'Линии по типам. Снимите галочку с типа, чтобы скрыть его.',railKmActive:'км действ.',railSegs:'участков',railElec:'электрифиц.',railActiveGrp:'Действующие',railHistGrp:'Исторические и неактивные'});
@@ -330,6 +351,8 @@ Object.assign(I18N.hy,{railTracks:'Գծերի քանակ',railService:'Գծի ն
 Object.assign(I18N.ru,{railTracks:'Число путей',railService:'Назначение пути',railMainTrack:'Главный путь',railSingle:'Однопутная',railDouble:'Два пути и более',railKmShown:'км показано',railMulti:'многопутн.',railBridgeKm:'км мосты',railTunnelKm:'км тоннели',railReset:'Сбросить фильтры',retry:'Повторить','usage.main':'Главная линия','usage.branch':'Ветка','usage.industrial':'Промышленная','usage.tourism':'Туристическая','usage.military':'Военная','service.yard':'Станционный','service.siding':'Боковой','service.spur':'Подъездной','service.crossover':'Соединительный'});
 Object.assign(I18N.en,{"rnd": "Random road", "q1": "What do the M, H and T road codes mean?", "a1": "In Armenia, M roads are interstate (international) highways, H roads are national (republican) roads and T roads are local roads. Each road's ref tag is shown in its popup.", "q2": "Where does the data come from?", "a2": "Everything comes from OpenStreetMap, the free community-built map. The page loads a monthly snapshot, or queries OpenStreetMap live if none is available. Spot a mistake? Use the edit link in any popup.", "q3": "Can I download the data?", "a3": "Yes. Export what you see as GeoJSON or CSV, or use the open files in the data folder. The data is under the ODbL licence: credit OpenStreetMap contributors."});Object.assign(I18N.hy,{"rnd": "Պատահական ճանապարհ", "q1": "Ի՞նչ են նշանակում Մ, Հ և Տ ճանապարհների կոդերը։", "a1": "Հայաստանում Մ-ն միջպետական մայրուղիներն են, Հ-ն՝ հանրապետական, Տ-ն՝ տեղական ճանապարհները։ Ճանապարհի ref նշումը երևում է նրա պատուհանում։", "q2": "Որտեղի՞ց են տվյալները։", "a2": "Ամեն ինչ OpenStreetMap-ից է՝ համայնքի ստեղծած ազատ քարտեզից։ Էջը բեռնում է ամսական պատկեր կամ հարցում է անում ուղիղ։ Սխալ նկատեցի՞ք․ օգտվեք պատուհանի խմբագրման հղումից։", "q3": "Կարո՞ղ եմ ներբեռնել տվյալները։", "a3": "Այո։ Արտահանեք տեսանելին GeoJSON կամ CSV ձևաչափով, կամ օգտվեք data պանակի բաց ֆայլերից։ Լիցենզիա՝ ODbL, նշեք OpenStreetMap-ի ներդրողներին։"});Object.assign(I18N.ru,{"rnd": "Случайная дорога", "q1": "Что означают коды дорог M, H и T?", "a1": "В Армении M — межгосударственные магистрали, H — республиканские дороги, T — местные дороги. Тег ref каждой дороги показан во всплывающем окне.", "q2": "Откуда данные?", "a2": "Всё из OpenStreetMap — свободной карты, которую создаёт сообщество. Страница загружает ежемесячный снимок или запрашивает OSM напрямую. Нашли ошибку? Используйте ссылку редактирования в окне.", "q3": "Можно ли скачать данные?", "a3": "Да. Экспортируйте видимое в GeoJSON или CSV либо берите открытые файлы из папки data. Лицензия ODbL: указывайте участников OpenStreetMap."});const HASH0=location.hash;
 Object.assign(I18N.en,{"allRoads": "All roads", "colourBy": "Colour lines by", "railSpeed": "Speed", "railShowHint": "One attribute at a time. Untick values below to hide them."});Object.assign(I18N.hy,{"allRoads": "Բոլոր ճանապարհները", "colourBy": "Գույնը ըստ", "railSpeed": "Արագություն", "railShowHint": "Մեկ հատկանիշ միանգամից։ Անջատեք արժեքները՝ թաքցնելու համար։"});Object.assign(I18N.ru,{"allRoads": "Все дороги", "colourBy": "Раскрасить по", "railSpeed": "Скорость", "railShowHint": "По одному признаку. Снимайте галочки, чтобы скрыть значения."});
+Object.assign(I18N.en,{"layersBtn": "Layers & data"});Object.assign(I18N.hy,{"layersBtn": "Շերտեր և տվյալներ"});Object.assign(I18N.ru,{"layersBtn": "Слои и данные"});
+Object.assign(I18N.en,{"subShow": "Subway (Yerevan Metro)", "subway": "Subway", "subSep": "separate from railways", "subNone": "Loading…"});Object.assign(I18N.hy,{"subShow": "Մետրո (Երևան)", "subway": "Մետրո", "subSep": "առանձին երկաթուղուց", "subNone": "Բեռնվում է…"});Object.assign(I18N.ru,{"subShow": "Метро (Ереван)", "subway": "Метро", "subSep": "отдельно от железных дорог", "subNone": "Загрузка…"});
 const ACTIVE=new Set(['rail','narrow_gauge','light_rail','subway','tram','monorail','funicular','preserved']);
 Object.assign(I18N.en,{popLanes:'Lanes',railPreserved:'Heritage rail',railFunicular:'Funicular',railMonorail:'Monorail',railRazed:'Razed',railConstruction:'Under construction',
  byType:'By type',byGauge:'By gauge',electrification:'Electrification',usage:'Usage','el.no':'Not electrified','el.contact_line':'Overhead line',gaugeUnknown:'Not tagged',
@@ -428,7 +451,7 @@ function draw(){const fs=[],pc={},pt={};let tot=0,unp=0;
   if(pass(p)){fs.push(f);tot+=p.km;if(p.sc==='unpaved')unp+=p.km}}
  map.getSource('roads')?.setData({type:'FeatureCollection',features:fs});CURRENT=fs;
  count('#kN',fs.length);count('#kK',Math.round(tot));$('#kU').textContent=tot?Math.round(unp/tot*100):'–';
- let rk=0;for(const f of RDB.values())if(ACTIVE.has(f.properties.rt)&&rpass(f.properties))rk+=f.properties.km;
+ let rk=0;for(const f of RDB.values())if(ACTIVE.has(f.properties.rt)&&f.properties.rt!=='subway'&&rpass(f.properties))rk+=f.properties.km;
  count('#kR',Math.round(rk));
  const set=(pre,obj)=>{const m=Math.max(1,...Object.values(obj));document.querySelectorAll(`[id^="${pre}v-"]`).forEach(e=>{const k=e.id.slice(pre.length+2),v=obj[k]||0;e.textContent=v?Math.round(v).toLocaleString()+' km':'–';$(`#${pre}b-${k}`).style.width=v/m*100+'%'})};
  set('',pc);if(TH==='speed'){const ks=Object.keys(pt).join();if(ks!==SPK){SPK=ks;legendUI();return}}if(TH)set('c',pt);updLegend()}
@@ -450,8 +473,8 @@ if(matchMedia('(hover:hover)').matches){
 /* ===== Railway legend ===== */
 function updateRailLegend(){const L=$('#rleg');$('#rcls').innerHTML='';$('#rmode').innerHTML=RMODES.map(([k,l])=>`<button type="button" data-m="${k}" aria-pressed="${k===RM}">${t(l)}</button>`).join('');
  if(!RDB.size){L.innerHTML=`<p class="note">${t('stLoadingRail')}</p>`;return}
- const R=v=>Math.round(v).toLocaleString(),agg={};RF.forEach(([k])=>agg[k]={});let sk=0,sn=0,ek=0,mk=0,bk=0,tk2=0,tot=0;
- for(const f of RDB.values()){const p=f.properties;tot+=p.km;RPRES.add(p.rt);
+ const R=v=>Math.round(v).toLocaleString(),agg={};RF.forEach(([k])=>agg[k]={});let sk=0,sn=0,ek=0,mk=0,bk=0,tk2=0,tot=0;const sub={km:0,n:0};
+ for(const f of RDB.values()){const p=f.properties;RPRES.add(p.rt);if(p.rt==='subway'){sub.km+=p.km;sub.n++;continue}tot+=p.km;
   RF.forEach(([k])=>{const o=agg[k],v=String(p[k]);(o[v]=o[v]||{km:0,n:0}).km+=p.km;o[v].n++});
   if(!rpass(p))continue;sk+=p.km;sn++;if(p.el!=='no')ek+=p.km;if(p.tk==='2+')mk+=p.km;if(p.bridge)bk+=p.km;if(p.tunnel)tk2+=p.km}
  const col=(k,v)=>k==='rt'?(r=>[DARK?r[3]:r[2],r[5]+1])(RCLS.find(x=>x[0]===v)||RCLS[0]):[rcol(k,v),3];
@@ -461,7 +484,7 @@ function updateRailLegend(){const L=$('#rleg');$('#rcls').innerHTML='';$('#rmode
    return `<label class="row${on?'':' off'}" style="--c:${c};--h:${hh}px"><input type="checkbox" data-rf="${k}|${esc(v)}"${on?' checked':''}><span class="sw"></span><span>${esc(nm(v))}<small>${o[v].n}</small></span><span class="v">${R(o[v].km)} km</span><span class="bar"><i style="width:${o[v].km/mx*100}%"></i></span></label>`}).join('')};
  const T=(b,s)=>`<div><b>${b}</b><span>${t(s)}</span></div>`;
  L.innerHTML=`<div class="rk">${T(R(sk),'railKmShown')}${T(sn.toLocaleString(),'railSegs')}${T((sk?Math.round(ek/sk*100):0)+'%','railElec')}${T((sk?Math.round(mk/sk*100):0)+'%','railMulti')}${T(R(bk),'railBridgeKm')}${T(R(tk2),'railTunnelKm')}</div><p class="note">${R(sk)} / ${R(tot)} km</p>`
-  +RF.filter(f=>f[0]===RM).map(block).join('')+`<button id="rreset" type="button">${t('railReset')}</button>`;map.getLayer('rail-a')&&map.setPaintProperty('rail-a','line-color',railColour());updLegend()}
+  +RF.filter(f=>f[0]===RM).map(block).join('')+`<button id="rreset" type="button">${t('railReset')}</button>`;$('#subinfo').textContent=sub.n?`${R(sub.km)} km · ${t('subSep')}`:t('subNone');map.getLayer('rail-a')&&map.setPaintProperty('rail-a','line-color',railColour());updLegend()}
 /* ===== Language toggle ===== */
 document.addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(b)setLang(b.dataset.lang)});
 const updLangBtns=()=>document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===LANG)));
@@ -474,7 +497,7 @@ function setLang(l){LANG=['en','hy','ru'].includes(l)?l:'en';applyStatic();updLa
 function updLegend(){const e=$('#lg');if(!e)return;const li=(c,l,h,bs)=>`<div style="--c:${c};--h:${h}px;--bs:${bs||'solid'}"><i></i>${l}</div>`;let o='';
  if(TH)o=THEMES[TH].L.filter(l=>!H.has(l[0])&&(TH!=='speed'||l[0]==='none'||SPK.split(',').includes(l[0]))).map(l=>li(tl(l),thName(TH,l[0]),3)).join('');
  else o=CLS.filter(c=>S.cls.has(c[0])&&(CI[c[0]]<MAIN||S.local)).map(c=>li(cc(c),clsName(c[0]),Math.min(c[6],4),c[0]==='path'?'dotted':c[0]==='track'?'dashed':'solid')).join('');
- if(RL&&RORD[RM]){const nm=RF.find(f=>f[0]===RM)[2];o+=RORD[RM].filter(v=>!RHF[RM].has(v)&&(RM!=='rt'||ACTIVE.has(v))).map(v=>li(rcol(RM,v),nm(v),2,'dashed')).join('')}
+ if(RL&&RORD[RM]){const nm=RF.find(f=>f[0]===RM)[2];o+=RORD[RM].filter(v=>!RHF[RM].has(v)&&(RM!=='rt'||ACTIVE.has(v))).map(v=>li(rcol(RM,v),nm(v),2,'dashed')).join('')}if(SB&&RPRES.has('subway'))o+=li(DARK?'#C792EA':'#6A1B9A',t('subway'),4);
  e.innerHTML=o;e.style.display=o?'block':'none'}
 /* ===== Map ===== */
 const W=(c,m)=>['interpolate',['linear'],['zoom'],5,c[5][0]*m,10,c[5][1]*m,16,c[5][2]*m];
@@ -493,6 +516,8 @@ function setup(){const font=(map.getStyle().layers.find(l=>l.type==='symbol'&&l.
  map.addSource('rail',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
  map.addLayer({id:'rail-a',type:'line',source:'rail',layout:{visibility:RL?'visible':'none'},paint:{'line-color':railColour(),'line-width':WR(RCLS[0],1)}});
  map.addLayer({id:'rail-b',type:'line',source:'rail',layout:{visibility:RL?'visible':'none'},paint:{'line-color':DARK?'#0F161E':'#fff','line-width':['interpolate',['linear'],['zoom'],5,.4,10,.8,16,1.4],'line-dasharray':[2,3]}});
+ map.addLayer({id:'sub-a',type:'line',source:'rail',filter:['==',['get','rt'],'subway'],layout:{visibility:SB?'visible':'none','line-cap':'round','line-join':'round'},paint:{'line-color':DARK?'#C792EA':'#6A1B9A','line-width':['interpolate',['linear'],['zoom'],5,1.6,10,3.2,16,7]}});
+ map.addLayer({id:'sub-b',type:'line',source:'rail',filter:['==',['get','rt'],'subway'],layout:{visibility:SB?'visible':'none'},paint:{'line-color':DARK?'#0F161E':'#fff','line-width':['interpolate',['linear'],['zoom'],8,.5,16,1.6],'line-dasharray':[1.5,2]}});
  map.addSource('roads',{type:'geojson',data:{type:'FeatureCollection',features:[]},tolerance:.5});
  map.addSource('fresh',{type:'geojson',data:{type:'FeatureCollection',features:[]}});
  [...CLS].reverse().forEach(c=>{const p={'line-color':cc(c),'line-width':W(c,1)};if(c[8])p['line-dasharray']=c[8];
@@ -506,11 +531,14 @@ const r=(a,b)=>b?`<tr><td>${a}</td><td>${esc(b)}</td></tr>`:'',nn=v=>v!=null&&v!
 CLS.forEach(c=>{map.on('mouseenter','r-'+c[0],()=>map.getCanvas().style.cursor='pointer');map.on('mouseleave','r-'+c[0],()=>map.getCanvas().style.cursor='');
  map.on('click','r-'+c[0],e=>{const p=e.features[0].properties;
   new maplibregl.Popup({maxWidth:'280px'}).setLngLat(e.lngLat).setHTML(`<div class="pop"><div class="pt">${esc(p.name||p.ref||t('popUnnamed'))}</div><table>${r(t('popClass'),clsName(p.cls))}${p.am_class?r(t('popAmClass'),p.am_class):''}${p.ref?r(t('popRef'),p.ref):''}${p.tg&&p.tg!=='na'?r(t('popGrade'),thName('grade',p.tg)):''}${p.surface?r(t('popSurface'),p.surface):''}${nn(p.speed)?r(t('popSpeed'),p.speed+' km/h'):''}${nn(p.lanes)?r(t('popLanes'),p.lanes):''}${r(t('popLight'),thName('lit',p.lit))}${r(t('popLength'),p.km+' km')}</table><a href="https://www.openstreetmap.org/way/${p.id}" target="_blank" rel="noopener">${t('popEdit')}</a></div>`).addTo(map)})});
-['rail-a','rail-b'].forEach(lid=>{map.on('click',lid,e=>{const p=e.features[0].properties;if(!p.id)return;
+['rail-a','rail-b','sub-a'].forEach(lid=>{map.on('click',lid,e=>{const p=e.features[0].properties;if(!p.id)return;
  const g=p.gauge_norm?gaugeName(p.gauge_norm):p.gauge||t('notTagged');
  new maplibregl.Popup({maxWidth:'300px'}).setLngLat(e.lngLat).setHTML(`<div class="pop"><div class="pt">${esc(p.name||p.ref||t('popRailName'))}</div><table>${r(t('popRailType'),railName(p.rt))}${r(t('popGauge'),g)}${r(t('popEl'),lab('el.',p.el))}${p.voltage?r(t('popVoltage'),p.voltage+(p.freq?' · '+p.freq+' Hz':'')):''}${p.tracks?r(t('popTracks'),p.tracks):''}${p.usage?r(t('popUsage'),p.usage):''}${p.service?r(t('popService'),p.service):''}${r(t('popLength'),p.km+' km')}</table><a href="https://www.openstreetmap.org/way/${p.id}" target="_blank" rel="noopener">${t('popEdit')}</a></div>`).addTo(map)})});
 map.on('moveend',loadView);
 map.on('moveend',()=>{try{if(location.protocol[0]==='h'){const c=map.getCenter();history.replaceState(null,'',location.pathname+location.search+'#'+map.getZoom().toFixed(2)+'/'+c.lat.toFixed(4)+'/'+c.lng.toFixed(4))}}catch{}});
+const MOB=matchMedia('(max-width:760px)'),SH=['peek','half','full'],setSheet=s=>{$('#wrap').dataset.sheet=s;[280,600].forEach(d=>setTimeout(()=>map.resize(),d))};
+$('#sheet').onclick=()=>setSheet(SH[(SH.indexOf($('#wrap').dataset.sheet)+1)%3]);
+map.on('click',()=>{if(MOB.matches&&$('#wrap').dataset.sheet!=='peek')setSheet('peek')});
 $('#rnd').onclick=()=>{const a=[...DB.values()].filter(f=>f.properties.name&&f.properties.km>1&&pass(f.properties));if(!a.length)return;const f=a[Math.random()*a.length|0],c=f.geometry.coordinates;map.flyTo({center:c[c.length>>1],zoom:13,essential:true});setTimeout(()=>flash([f]),900);status(f.properties.name,`${f.properties.km} km · ${clsName(f.properties.cls)}`,100)};
 /* ===== Buttons ===== */
 $('#replay').onclick=()=>{FORCELIVE=true;BYTES=0;GEN++;DB=new Map();RDB=new Map();cells=new Set();staticOK={};railDone=false;
@@ -518,6 +546,7 @@ $('#replay').onclick=()=>{FORCELIVE=true;BYTES=0;GEN++;DB=new Map();RDB=new Map(
  $('#dlMsg').textContent='';srcNote();loadMain();loadRail();if(S.local)loadView()};
 $('#tm').onclick=()=>{DARK=!DARK;document.documentElement.dataset.theme=DARK?'dark':'light';syncChrome();try{localStorage.setItem('amr-theme',DARK?'dark':'light')}catch{}
  buildCls();legendUI();updateRailLegend();map.setStyle(STY(),{diff:false})};
+$('#sub').onchange=e=>{SB=e.target.checked;['sub-a','sub-b'].forEach(i=>map.getLayer(i)&&map.setLayoutProperty(i,'visibility',SB?'visible':'none'));updLegend()};
 $('#rl').onchange=e=>{RL=e.target.checked;updLegend();['rail-a','rail-b'].forEach(i=>map.setLayoutProperty(i,'visibility',RL?'visible':'none'));
  if(RL&&!railDone)loadRail()};
 $('.railsec').onchange=e=>{const d=e.target.dataset.rf;if(!d)return;const[k,v]=d.split('|');e.target.checked?RHF[k].delete(v):RHF[k].add(v);railFilter();updateRailLegend();render()};
